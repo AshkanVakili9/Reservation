@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Sms, User
+from ..user.models import Sms, User
 
 
 
@@ -33,6 +33,3 @@ class SmsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sms
         fields = '__all__'
-
-
-

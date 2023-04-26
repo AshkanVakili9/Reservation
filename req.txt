@@ -1,9 +1,0 @@
-django
-djangorestframework
-drf-spectacular
-drf-extra-fields
-Pillow
-psycopg2
-requests
-virtualenv
-python-dotenv
