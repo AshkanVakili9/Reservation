@@ -41,7 +41,6 @@ def registerUser(request):
         serializer = UserSerializerWithToken(user, many=False)
         return Response(serializer.data)
     
-    
     except:
         message = {'detail':'User with this email already exists'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
@@ -56,7 +55,7 @@ def updateUserProfile(request):
     
     data = request.data
     
-    user.full_name = data['name']
+    user.full_name = data['full_name']
     
     if data['password'] != '':
         user.password = make_password(data['password'])
@@ -87,22 +86,23 @@ def getUsers(request):
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getUserById(request, pk):
-    user = User.objects.get(_id=pk)
+    user = User.objects.get(id=pk)
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
 
 @api_view(['PUT'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdminUser])
 def updateUser(request, pk):
-    user = User.objects.get(_id=pk)
+    user = User.objects.get(id=pk)
     
     data = request.data
     
-    user.first_name = data['name']
-    user.last_name = data['email']
-    user.email = data['email']
-    user.is_staff = data['isAdmin']
+    user.full_name = data['full_name']
+    user.phone = data['phone']
+    
+    if data['is_staff'] != '':
+        user.is_staff = data['is_staff']
     
     user.save()
     
@@ -115,6 +115,10 @@ def updateUser(request, pk):
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteUser(request, pk):
-    userForDeletion = User.objects.get(_id=pk)
-    userForDeletion.delete()
-    return Response('User deleted successfully', status=status.HTTP_200_OK)
+    try:
+        userForDeletion = User.objects.get(id=pk)
+        if userForDeletion:
+            userForDeletion.delete()
+            return Response('User deleted successfully', status=status.HTTP_200_OK)
+    except Exception:
+        return Response('User not found.', status=status.HTTP_404_NOT_FOUND)
