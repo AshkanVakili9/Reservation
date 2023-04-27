@@ -17,7 +17,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = int(os.environ.get('DEBUG_VALUE', 0))
 
 
-AUTH_USER_MODEL = 'user.User'
+AUTH_USER_MODEL = 'base.User'
 
 
 
@@ -30,9 +30,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_spectacular',
-    'rest_framework.authtoken',
     'requests',
     'iranian_cities',
+    'rest_framework_simplejwt',
     
     'reservation.base.apps.BaseConfig',
 ]
@@ -53,6 +53,8 @@ SIMPLE_JWT = {
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
