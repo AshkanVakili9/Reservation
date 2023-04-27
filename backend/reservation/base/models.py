@@ -8,6 +8,7 @@ from .managers import CustomUserManager
 class Sms(models.Model):
     phone = models.CharField(max_length=11)
     sms = models.CharField(max_length=6)
+    sentDate = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = ('Sm')

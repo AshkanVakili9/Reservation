@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'requests',
     'iranian_cities',
     'rest_framework_simplejwt',
+    'django_extensions',
     
     'reservation.base.apps.BaseConfig',
 ]

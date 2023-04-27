@@ -9,6 +9,8 @@ urlpatterns = [
 
 
     path('register/', views.registerUser, name='register'),
+    path('verifycode/', views.verifyCode, name='verify-sms-code'),
+    path('sendSms/', views.sendSms, name='send-sms-code'),
     
     path('profile/', views.getUserProfile, name='user-profile'),
     path('profile/update/', views.updateUserProfile, name='user-profile-update'),
