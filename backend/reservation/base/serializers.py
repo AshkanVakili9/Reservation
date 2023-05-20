@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Sms, User
+from .models import *
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
@@ -45,4 +45,26 @@ class SmsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sms
+        fields = '__all__'
+
+
+
+
+
+
+""" ------------- Salon ------------- """
+
+class SalonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Salon
+        fields = '__all__'
+
+class CourtSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Court
+        fields = '__all__'
+
+class ReservationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reservation
         fields = '__all__'

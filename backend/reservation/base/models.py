@@ -43,3 +43,28 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 
+
+class Salon(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=200)
+    phone_number = models.CharField(max_length=20)
+    # Other salon attributes like opening hours, facilities, etc.
+
+
+
+class Court(models.Model):
+    salon = models.ForeignKey(Salon, on_delete=models.CASCADE, related_name='courts')
+    name = models.CharField(max_length=100)
+    # Other court attributes like size, surface type, etc.
+
+
+
+
+
+class Reservation(models.Model):
+    court = models.ForeignKey(Court, on_delete=models.CASCADE, related_name='reservations')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    # Other reservation attributes like payment status, duration, etc.
